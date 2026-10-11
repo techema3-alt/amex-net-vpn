@@ -21,8 +21,8 @@ jobs:
 
       - name: Install SDK parts
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platforms;android-34" "build-tools;34.0.0" "ndk;26.1.10909125"
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "ndk;26.1.10909125"
 
       - name: Fetch tun2socks (hev-socks5-tunnel)
         run: git clone --recursive --depth 1 https://github.com/heiher/hev-socks5-tunnel app/src/main/jni/hev-socks5-tunnel
