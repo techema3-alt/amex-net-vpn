@@ -62,7 +62,13 @@ jobs:
           gradle-version: '8.5'
 
       - name: Build release APK
-        run: gradle --no-daemon assembleRelease
+        run: |
+          set +e
+          gradle --no-daemon assembleRelease 2>&1 | tee build.log
+          code=${PIPESTATUS[0]}
+          echo "=== ERRORS ==="
+          grep -E "^e: |error:|Execution failed" build.log | sed "s#.*/vpn/##" | head -60
+          exit $code
 
       - uses: actions/upload-artifact@v4
         with:
