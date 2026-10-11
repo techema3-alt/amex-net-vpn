@@ -562,7 +562,7 @@ class SocksServer(
             return f.get(6, TimeUnit.SECONDS)
         } catch (e: Exception) {
             f.cancel(true)
-            ref.get()?.close()
+            ref.get()?.let { it.close() }
             throw e
         }
     }
